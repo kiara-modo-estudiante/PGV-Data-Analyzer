@@ -29,6 +29,20 @@ public class StockAnalyzer {
         FileHelper.writeCSV(highStockOutputPath, headers, highStockProducts);
     }
 
+    /**
+     * Filtra una lista de productos según su cantidad en stock.
+     *
+     * @param products Una lista de datos de productos.
+     * @param minStock La cantidad mínima en stock (inclusive).
+     * @param maxStock La cantidad máxima en stock (exclusiva).
+     * @return Una lista de productos con cantidad en stock dentro del rango.
+     * 
+     * @throws NumberFormatException          Si la cantidad en stock no se puede
+     *                                        analizar como un entero.
+     * 
+     * @throws ArrayIndexOutOfBoundsException Si el array del producto no tiene
+     *                                        suficientes columnas.
+     */
     private List<String[]> filterProductsByStock(List<String[]> products, int minStock, int maxStock) {
         List<String[]> filteredProducts = new ArrayList<>();
         boolean isFirstRow = true; // Ignorar encabezados
