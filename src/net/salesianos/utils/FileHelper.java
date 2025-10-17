@@ -1,6 +1,7 @@
 package net.salesianos.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -84,5 +85,17 @@ public class FileHelper {
         String name = filePath.substring(0, dotIndex);
         String extension = filePath.substring(dotIndex);
         return name + "_" + date + extension; // Agrega la fecha antes de la extensión
+    }
+
+    /**
+     * Crea el directorio de salida si no existe.
+     *
+     * @param filePath Ruta del archivo para el cual se debe crear el directorio.
+     */
+    public static void createOutputDirectory(String filePath) {
+        File outputDir = new File(filePath).getParentFile();
+        if (outputDir != null && !outputDir.exists()) {
+            outputDir.mkdirs();
+        }
     }
 }

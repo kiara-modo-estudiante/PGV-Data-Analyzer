@@ -2,7 +2,6 @@ package net.salesianos.modules;
 
 import net.salesianos.utils.FileHelper;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -46,8 +45,8 @@ public class StockAnalyzer {
         }
 
         // Crear la carpeta de salida si no existe
-        createOutputDirectory(lowStockOutputPath);
-        createOutputDirectory(highStockOutputPath);
+        FileHelper.createOutputDirectory(lowStockOutputPath);
+        FileHelper.createOutputDirectory(highStockOutputPath);
 
         // Escribir productos con bajo stock en un nuevo archivo CSV
         String[] headers = { "Id", "Nombre", "Categoría", "Precio unidad", "Cantidad en stock", "Almacén" };
@@ -55,12 +54,5 @@ public class StockAnalyzer {
 
         // Escribir productos con alto stock en un nuevo archivo CSV
         writer.writeCSV(highStockOutputPath, headers, highStockProducts);
-    }
-
-    private void createOutputDirectory(String filePath) {
-        File outputDir = new File(filePath).getParentFile();
-        if (!outputDir.exists()) {
-            outputDir.mkdirs();
-        }
     }
 }
