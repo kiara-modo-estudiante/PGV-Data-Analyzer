@@ -8,9 +8,11 @@ Id,Nombre,Categoria,Precio unidad,Cantidad en stock,Almacen
 7,Disco SSD 1TB,Almacenamiento,89.75,300,D-1
 8,Base refrigeradora,Accesorios,25.5,200,E-1
 9,Lámpara LED escritorio,Accesorios,34.2,60,E-2
-10,Portátil Gaming X1,Portátiles,1299.0,25,D-2
+10,Portátil Gaming X1,Portátiles,1299.0,2,D-2
 11,Mochila para portátil,Accesorios,59.95,70,A-1
 12,Memoria USB 64GB,Almacenamiento,12.2,220,A-2
 13,Silla gaming,Mobiliario,199.9,15,E-3
 14,Impresora multifunción,Impresoras,229.0,10,D-2
 15,Router Wi-Fi 6,Redes,99.0,95,E-1
+16,Tablet 10 pulgadas,Tablets,249.99,0,F-1
+17,Smartwatch deportivo,Wearables,199.99,3,F-2
