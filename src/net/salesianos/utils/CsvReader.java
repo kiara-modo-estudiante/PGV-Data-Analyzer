@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de utilidad para leer archivos CSV y procesar su contenido.
+ */
 public class CsvReader {
 
     public List<String[]> readCSV(String filePath) {
