@@ -1,13 +1,11 @@
-import net.salesianos.utils.CsvReader;
+import net.salesianos.modules.StockAnalyzer;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
         final String PRODUCTS_CSV_PATH = "./src/data/input/products.csv";
-        final String SALES_CSV_PATH = "./src/data/input/sales.csv";
+        final String LOW_STOCK_CSV_PATH = "./src/data/output/low_stock_report.csv";
 
-        CsvReader fileReader = new CsvReader();
-        fileReader.readCSV(PRODUCTS_CSV_PATH);
-
+        StockAnalyzer stockAnalyzer = new StockAnalyzer();
+        stockAnalyzer.analyzeStock(PRODUCTS_CSV_PATH, LOW_STOCK_CSV_PATH);
     }
 }
