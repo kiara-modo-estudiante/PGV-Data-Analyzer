@@ -1,7 +1,6 @@
 package net.salesianos.modules;
 
-import net.salesianos.utils.CsvReader;
-import net.salesianos.utils.CsvWriter;
+import net.salesianos.utils.FileHelper;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -12,15 +11,15 @@ import java.util.List;
 public class StockAnalyzer {
 
     public void analyzeStock(String inputFilePath, String lowStockOutputPath, String highStockOutputPath) {
-        CsvReader reader = new CsvReader();
-        CsvWriter writer = new CsvWriter();
+        FileHelper reader = new FileHelper();
+        FileHelper writer = new FileHelper();
 
         // Obtener la fecha actual y formatearla
         String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         // Modificar los nombres de los archivos de salida para incluir la fecha
-        lowStockOutputPath = appendDateToFileName(lowStockOutputPath, currentDate);
-        highStockOutputPath = appendDateToFileName(highStockOutputPath, currentDate);
+        lowStockOutputPath = FileHelper.appendDateToFileName(lowStockOutputPath, currentDate);
+        highStockOutputPath = FileHelper.appendDateToFileName(highStockOutputPath, currentDate);
 
         // Leer datos del archivo CSV
         List<String[]> products = reader.readCSV(inputFilePath);
@@ -63,15 +62,5 @@ public class StockAnalyzer {
         if (!outputDir.exists()) {
             outputDir.mkdirs();
         }
-    }
-
-    private String appendDateToFileName(String filePath, String date) {
-        int dotIndex = filePath.lastIndexOf(".");
-        if (dotIndex == -1) {
-            return filePath + "_" + date; // Si no hay extensión, solo agrega la fecha
-        }
-        String name = filePath.substring(0, dotIndex);
-        String extension = filePath.substring(dotIndex);
-        return name + "_" + date + extension; // Agrega la fecha antes de la extensión
     }
 }

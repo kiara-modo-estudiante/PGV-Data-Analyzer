@@ -1,0 +1,88 @@
+package net.salesianos.utils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FileHelper {
+
+    /**
+     * Lee un archivo CSV desde la ruta especificada y devuelve su contenido como
+     * una lista de arreglos de cadenas.
+     *
+     * @param filePath La ruta del archivo CSV a leer.
+     * @return Una lista de arreglos de cadenas.
+     * @throws IOException Si ocurre un error al leer el archivo.
+     */
+    public List<String[]> readCSV(String filePath) {
+        List<String[]> data = new ArrayList<>();
+        String line;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+            // Guardar datos en strings
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                data.add(values);
+            }
+
+            // Mostrar datos en consola
+            for (String[] row : data) {
+                for (String value : row) {
+                    System.out.print(value + " ");
+                }
+                System.out.println();
+
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+
+        return data;
+    }
+
+    /**
+     * Escribe datos en un archivo CSV.
+     * 
+     * @param filePath Ruta del archivo CSV de salida.
+     * @param headers  Encabezados de las columnas.
+     * @param data     Datos a escribir en el archivo (lista de filas).
+     */
+    public void writeCSV(String filePath, String[] headers, List<String[]> data) {
+        try (FileWriter writer = new FileWriter(filePath)) {
+            // Escribir encabezados
+            writer.append(String.join(",", headers));
+            writer.append("\n");
+
+            // Escribir datos
+            for (String[] row : data) {
+                writer.append(String.join(",", row));
+                writer.append("\n");
+            }
+
+            System.out.println("Archivo CSV generado: " + filePath);
+        } catch (IOException e) {
+            System.err.println("Error al escribir el archivo CSV: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Agrega una fecha al final del nombre del archivo, antes de la extensión.
+     *
+     * @param filePath Ruta del archivo original.
+     * @param date     Fecha a agregar al nombre del archivo.
+     * @return Ruta del archivo con la fecha agregada.
+     */
+    public static String appendDateToFileName(String filePath, String date) {
+        int dotIndex = filePath.lastIndexOf(".");
+        if (dotIndex == -1) {
+            return filePath + "_" + date; // Si no hay extensión, solo agrega la fecha
+        }
+        String name = filePath.substring(0, dotIndex);
+        String extension = filePath.substring(dotIndex);
+        return name + "_" + date + extension; // Agrega la fecha antes de la extensión
+    }
+}
