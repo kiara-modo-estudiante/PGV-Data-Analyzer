@@ -8,46 +8,44 @@ import java.util.List;
 public class StockAnalyzer {
 
     public void analyzeStock(String inputFilePath, String lowStockOutputPath, String highStockOutputPath) {
-        FileHelper reader = new FileHelper();
-        FileHelper writer = new FileHelper();
-
-        // Modificar los nombres de los archivos de salida para incluir la fecha
+        // Incluir la fecha en ficheros de salida
         lowStockOutputPath = FileHelper.appendDateToFileName(lowStockOutputPath);
         highStockOutputPath = FileHelper.appendDateToFileName(highStockOutputPath);
 
         // Leer datos del archivo CSV
-        List<String[]> products = reader.readCSV(inputFilePath);
+        List<String[]> products = FileHelper.readCSV(inputFilePath);
 
         // Filtrar productos con bajo y alto stock
-        List<String[]> lowStockProducts = new ArrayList<>();
-        List<String[]> highStockProducts = new ArrayList<>();
-        boolean isFirstRow = true; // Bandera para ignorar la primera fila
+        List<String[]> lowStockProducts = filterProductsByStock(products, 0, 50);
+        List<String[]> highStockProducts = filterProductsByStock(products, 500, Integer.MAX_VALUE);
+
+        // Crear las carpetas de salida si no existen
+        FileHelper.createOutputDirectory(lowStockOutputPath);
+        FileHelper.createOutputDirectory(highStockOutputPath);
+
+        // Escribir los resultados en archivos CSV
+        String[] headers = { "Id", "Nombre", "Categoría", "Precio unidad", "Cantidad en stock", "Almacén" };
+        FileHelper.writeCSV(lowStockOutputPath, headers, lowStockProducts);
+        FileHelper.writeCSV(highStockOutputPath, headers, highStockProducts);
+    }
+
+    private List<String[]> filterProductsByStock(List<String[]> products, int minStock, int maxStock) {
+        List<String[]> filteredProducts = new ArrayList<>();
+        boolean isFirstRow = true; // Ignorar encabezados
         for (String[] product : products) {
             if (isFirstRow) {
-                isFirstRow = false; // Ignorar encabezados
+                isFirstRow = false;
                 continue;
             }
             try {
                 int stock = Integer.parseInt(product[4]); // Columna "Cantidad en stock"
-                if (stock < 50) { // Umbral de bajo stock
-                    lowStockProducts.add(product);
-                } else if (stock > 500) { // Umbral de alto stock
-                    highStockProducts.add(product);
+                if (stock >= minStock && stock < maxStock) {
+                    filteredProducts.add(product);
                 }
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.err.println("Error al procesar el producto: " + e.getMessage());
             }
         }
-
-        // Crear la carpeta de salida si no existe
-        FileHelper.createOutputDirectory(lowStockOutputPath);
-        FileHelper.createOutputDirectory(highStockOutputPath);
-
-        // Escribir productos con bajo stock en un nuevo archivo CSV
-        String[] headers = { "Id", "Nombre", "Categoría", "Precio unidad", "Cantidad en stock", "Almacén" };
-        writer.writeCSV(lowStockOutputPath, headers, lowStockProducts);
-
-        // Escribir productos con alto stock en un nuevo archivo CSV
-        writer.writeCSV(highStockOutputPath, headers, highStockProducts);
+        return filteredProducts;
     }
 }

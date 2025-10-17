@@ -20,7 +20,7 @@ public class FileHelper {
      * @return Una lista de arreglos de cadenas.
      * @throws IOException Si ocurre un error al leer el archivo.
      */
-    public List<String[]> readCSV(String filePath) {
+    public static List<String[]> readCSV(String filePath) {
         List<String[]> data = new ArrayList<>();
         String line;
 
@@ -54,7 +54,7 @@ public class FileHelper {
      * @param headers  Encabezados de las columnas.
      * @param data     Datos a escribir en el archivo (lista de filas).
      */
-    public void writeCSV(String filePath, String[] headers, List<String[]> data) {
+    public static void writeCSV(String filePath, String[] headers, List<String[]> data) {
         try (FileWriter writer = new FileWriter(filePath)) {
             // Escribir encabezados
             writer.append(String.join(",", headers));
