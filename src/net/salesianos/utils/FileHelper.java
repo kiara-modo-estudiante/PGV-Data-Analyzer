@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,14 +79,17 @@ public class FileHelper {
      * @param date     Fecha a agregar al nombre del archivo.
      * @return Ruta del archivo con la fecha agregada.
      */
-    public static String appendDateToFileName(String filePath, String date) {
+    public static String appendDateToFileName(String filePath) {
+        // Obtener la fecha actual y formatearla
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
         int dotIndex = filePath.lastIndexOf(".");
         if (dotIndex == -1) {
-            return filePath + "_" + date; // Si no hay extensión, solo agrega la fecha
+            return filePath + "_" + currentDate; // Si no hay extensión, solo agrega la fecha
         }
         String name = filePath.substring(0, dotIndex);
         String extension = filePath.substring(dotIndex);
-        return name + "_" + date + extension; // Agrega la fecha antes de la extensión
+        return name + "_" + currentDate + extension; // Agrega la fecha antes de la extensión
     }
 
     /**

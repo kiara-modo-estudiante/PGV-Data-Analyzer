@@ -2,8 +2,6 @@ package net.salesianos.modules;
 
 import net.salesianos.utils.FileHelper;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +11,9 @@ public class StockAnalyzer {
         FileHelper reader = new FileHelper();
         FileHelper writer = new FileHelper();
 
-        // Obtener la fecha actual y formatearla
-        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
         // Modificar los nombres de los archivos de salida para incluir la fecha
-        lowStockOutputPath = FileHelper.appendDateToFileName(lowStockOutputPath, currentDate);
-        highStockOutputPath = FileHelper.appendDateToFileName(highStockOutputPath, currentDate);
+        lowStockOutputPath = FileHelper.appendDateToFileName(lowStockOutputPath);
+        highStockOutputPath = FileHelper.appendDateToFileName(highStockOutputPath);
 
         // Leer datos del archivo CSV
         List<String[]> products = reader.readCSV(inputFilePath);
