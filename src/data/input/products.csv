@@ -1,4 +1,4 @@
-id,nombre,categoria,precio unidad,cantidad en stock,almacen
+Id,Nombre,Categoria,Precio unidad,Cantidad en stock,Almacen
 1,Teclado mecánico,Periféricos,89.99,150,A-1
 2,Ratón inalámbrico,Periféricos,29.5,80,A-2
 3,Monitor 24 pulgadas,Monitores,159.9,45,B-1
