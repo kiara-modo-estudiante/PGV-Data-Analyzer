@@ -7,6 +7,20 @@ import java.util.List;
 
 public class StockAnalyzer {
 
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.err.println("Uso: java StockAnalyzer <inputFilePath> <lowStockOutputPath> <highStockOutputPath>");
+            System.exit(1);
+        }
+
+        String inputFilePath = args[0];
+        String lowStockOutputPath = args[1];
+        String highStockOutputPath = args[2];
+
+        StockAnalyzer analyzer = new StockAnalyzer();
+        analyzer.analyzeStock(inputFilePath, lowStockOutputPath, highStockOutputPath);
+    }
+
     public void analyzeStock(String inputFilePath, String lowStockOutputPath, String highStockOutputPath) {
         // Incluir la fecha en ficheros de salida
         lowStockOutputPath = FileHelper.appendDateToFileName(lowStockOutputPath);
@@ -29,20 +43,6 @@ public class StockAnalyzer {
         FileHelper.writeCSV(highStockOutputPath, headers, highStockProducts);
     }
 
-    /**
-     * Filtra una lista de productos según su cantidad en stock.
-     *
-     * @param products Una lista de datos de productos.
-     * @param minStock La cantidad mínima en stock (inclusive).
-     * @param maxStock La cantidad máxima en stock (exclusiva).
-     * @return Una lista de productos con cantidad en stock dentro del rango.
-     * 
-     * @throws NumberFormatException          Si la cantidad en stock no se puede
-     *                                        analizar como un entero.
-     * 
-     * @throws ArrayIndexOutOfBoundsException Si el array del producto no tiene
-     *                                        suficientes columnas.
-     */
     private List<String[]> filterProductsByStock(List<String[]> products, int minStock, int maxStock) {
         List<String[]> filteredProducts = new ArrayList<>();
         boolean isFirstRow = true; // Ignorar encabezados
