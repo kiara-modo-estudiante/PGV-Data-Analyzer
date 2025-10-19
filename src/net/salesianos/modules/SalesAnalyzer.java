@@ -10,6 +10,20 @@ import net.salesianos.utils.FileHelper;
 
 public class SalesAnalyzer {
 
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.err.println("Uso: java SalesAnalyzer <inputFilePath> <productReportPath> <dateReportPath>");
+            System.exit(1);
+        }
+
+        String inputFilePath = args[0];
+        String productReportPath = args[1];
+        String dateReportPath = args[2];
+
+        SalesAnalyzer analyzer = new SalesAnalyzer();
+        analyzer.analyzeSales(inputFilePath, productReportPath, dateReportPath);
+    }
+
     public void analyzeSales(String inputFilePath, String productReportPath, String dateReportPath) {
         // Leer datos del archivo CSV
         List<String[]> salesData = FileHelper.readCSV(inputFilePath);
@@ -63,18 +77,6 @@ public class SalesAnalyzer {
         FileHelper.writeCSV(dateReportPath, dateHeaders, dateReportData);
     }
 
-    /**
-     * Genera un informe de productos basado en la cantidad de ventas y los datos de
-     * ingresos.
-     *
-     * @param productSalesCount Un mapa que contiene la cantidad de ventas para cada
-     *                          producto.
-     * @param productRevenue    Un mapa que contiene los ingresos para cada
-     *                          producto.
-     * @return Una lista de arreglos de cadenas, donde cada arreglo representa una
-     *         fila en el informe.
-     * 
-     */
     private List<String[]> generateProductReport(Map<String, Integer> productSalesCount,
             Map<String, Double> productRevenue) {
         List<String[]> report = new ArrayList<>();
@@ -88,17 +90,6 @@ public class SalesAnalyzer {
         return report;
     }
 
-    /**
-     * Genera un informe de ventas por fecha a partir de un mapa que contiene las
-     * ventas por fecha.
-     *
-     * @param salesByDate Un mapa donde las claves son fechas (String) y los valores
-     *                    son las ventas (Integer) asociadas a esas fechas.
-     * @return Una lista de arreglos de cadenas (String[]), donde cada arreglo
-     *         contiene dos elementos:
-     *         el primero es la fecha y el segundo es el número de ventas en formato
-     *         de cadena.
-     */
     private List<String[]> generateDateReport(Map<String, Integer> salesByDate) {
         List<String[]> report = new ArrayList<>();
         for (String date : salesByDate.keySet()) {
