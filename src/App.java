@@ -24,6 +24,17 @@ public class App {
             salesProcess.waitFor();
             stockProcess.waitFor();
 
+            // Comprobar el código de salida de cada proceso
+            int salesExitCode = salesProcess.waitFor();
+            int stockExitCode = stockProcess.waitFor();
+
+            if (salesExitCode != 0) {
+                System.err.println("El proceso SalesAnalyzer terminó con errores. Código de salida: " + salesExitCode);
+            }
+            if (stockExitCode != 0) {
+                System.err.println("El proceso StockAnalyzer terminó con errores. Código de salida: " + stockExitCode);
+            }
+
             System.out.println("Todos los análisis han finalizado.");
         } catch (IOException | InterruptedException e) {
             System.err.println("Error al ejecutar los procesos: " + e.getMessage());
