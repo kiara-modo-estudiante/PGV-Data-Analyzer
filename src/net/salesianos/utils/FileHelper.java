@@ -32,19 +32,38 @@ public class FileHelper {
                 data.add(values);
             }
 
-            // // Mostrar datos en consola
-            // for (String[] row : data) {
-            // for (String value : row) {
-            // System.out.print(value + " ");
-            // }
-            // System.out.println();
-
-            // }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
 
         return data;
+    }
+
+    /**
+     * Lee un archivo CSV desde la ruta especificada y lo imprime en consola.
+     *
+     * @param filePath La ruta del archivo CSV que se desea leer e imprimir.
+     * @throws IOException Si ocurre un error al leer el archivo.
+     */
+    public static void printCSV(String filePath) {
+        List<String[]> data = new ArrayList<>();
+        String line;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+            // Guardar datos en strings
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                data.add(values);
+            }
+
+            // Imprimir datos en formato tabular
+            for (String[] row : data) {
+                System.out.println(String.join(" | ", row));
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
     }
 
     /**
