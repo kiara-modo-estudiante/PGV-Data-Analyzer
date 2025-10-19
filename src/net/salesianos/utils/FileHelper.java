@@ -57,12 +57,51 @@ public class FileHelper {
                 data.add(values);
             }
 
-            // Imprimir datos en formato tabular
+            // Calcular el ancho máximo de cada columna
+            int[] columnWidths = new int[data.get(0).length];
             for (String[] row : data) {
-                System.out.println(String.join(" | ", row));
+                for (int i = 0; i < row.length; i++) {
+                    columnWidths[i] = Math.max(columnWidths[i], row[i].length());
+                }
+            }
+
+            // Imprimir datos en formato tabular con printf
+            for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
+                String[] row = data.get(rowIndex);
+                for (int i = 0; i < row.length; i++) {
+                    if (rowIndex == 0) {
+                        // Imprimir la primera fila en negrita
+                        System.out.printf(ConsoleColors.BOLD + "%-" + (columnWidths[i] + 3) + "s" + ConsoleColors.RESET,
+                                row[i]);
+                    } else {
+                        System.out.printf("%-" + (columnWidths[i] + 3) + "s", row[i]);
+                    }
+                }
+                System.out.println();
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Imprime el contenido de todos los archivos CSV ubicados en el directorio
+     * "./src/data/output".
+     */
+    public static void printAllCSVOutputs() {
+        File directory = new File("./src/data/output");
+        File[] files = directory.listFiles((dir, name) -> name.endsWith(".csv"));
+
+        if (files != null) {
+            for (File file : files) {
+                System.out.println("⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯");
+                System.out
+                        .println(ConsoleColors.CYAN + "Contenido del archivo: " + file.getName() + ConsoleColors.RESET);
+                FileHelper.printCSV(file.getPath());
+            }
+        } else {
+            System.out.println(
+                    ConsoleColors.RED + "No se encontraron archivos en el directorio de salida." + ConsoleColors.RESET);
         }
     }
 

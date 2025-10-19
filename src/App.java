@@ -1,4 +1,5 @@
 import net.salesianos.utils.ConsoleColors;
+import net.salesianos.utils.FileHelper;
 import net.salesianos.utils.ProcessLauncher;
 
 public class App {
@@ -22,5 +23,11 @@ public class App {
         processLauncher.launchProcess("StockAnalyzer", stockProcessBuilder);
 
         System.out.println(ConsoleColors.PURPLE + "\n¡Todos los análisis han finalizado!" + ConsoleColors.RESET);
+
+        // Mostrar resoluciones finales
+        System.out.println(ConsoleColors.PURPLE + "\nResultados finales:" + ConsoleColors.RESET);
+
+        FileHelper.printAllCSVOutputs();
+
     }
 }
