@@ -9,11 +9,23 @@ import java.util.List;
 public class StockAnalyzer {
 
     public static void main(String[] args) {
-        StockAnalyzer analyzer = new StockAnalyzer();
-        analyzer.analyzeStock();
+        if (args.length < 2) {
+            System.err.println("Uso: java StockAnalyzer <maxLowStock> <minHighStock>");
+            return;
+        }
+
+        try {
+            int maxLowStock = Integer.parseInt(args[0]);
+            int minHighStock = Integer.parseInt(args[1]);
+
+            StockAnalyzer analyzer = new StockAnalyzer();
+            analyzer.analyzeStock(maxLowStock, minHighStock);
+        } catch (NumberFormatException e) {
+            System.err.println("Los argumentos deben ser números enteros.");
+        }
     }
 
-    public void analyzeStock() {
+    public void analyzeStock(int maxLowStock, int minHighStock) {
         // Usar rutas directamente desde PathsConfig
         String inputFilePath = PathsConfig.PRODUCTS_CSV_PATH;
         String lowStockOutputPath = PathsConfig.LOW_STOCK_CSV_PATH;
@@ -27,8 +39,8 @@ public class StockAnalyzer {
         List<String[]> products = FileHelper.readCSV(inputFilePath);
 
         // Filtrar productos con bajo y alto stock
-        List<String[]> lowStockProducts = filterProductsByStock(products, 0, 50);
-        List<String[]> highStockProducts = filterProductsByStock(products, 500, Integer.MAX_VALUE);
+        List<String[]> lowStockProducts = filterProductsByStock(products, 0, maxLowStock);
+        List<String[]> highStockProducts = filterProductsByStock(products, minHighStock, Integer.MAX_VALUE);
 
         // Crear las carpetas de salida si no existen
         FileHelper.createOutputDirectory(lowStockOutputPath);
