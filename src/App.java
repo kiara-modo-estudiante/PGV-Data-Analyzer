@@ -44,6 +44,7 @@ public class App {
             System.out.println("Todos los análisis han finalizado.");
         } catch (IOException | InterruptedException e) {
             System.err.println("Error al ejecutar los procesos: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
