@@ -85,7 +85,7 @@ public class FileHelper {
                 writer.append("\n");
             }
 
-            System.out.println(ConsoleColors.GREEN + "Archivo CSV generado: " + ConsoleColors.RESET + filePath);
+            System.out.println(ConsoleColors.CYAN + "Archivo CSV generado: " + ConsoleColors.RESET + filePath);
         } catch (IOException e) {
             System.err.println("Error al escribir el archivo CSV: " + e.getMessage());
         }
