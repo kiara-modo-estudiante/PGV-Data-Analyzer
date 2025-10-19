@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class App {
     public static void main(String[] args) {
@@ -20,6 +22,10 @@ public class App {
             Process salesProcess = salesProcessBuilder.start();
             Process stockProcess = stockProcessBuilder.start();
 
+            // Ver mensajes generados por los subprocesos
+            captureProcessOutput(salesProcess, "SalesAnalyzer");
+            captureProcessOutput(stockProcess, "StockAnalyzer");
+
             // Esperar a que ambos procesos terminen
             salesProcess.waitFor();
             stockProcess.waitFor();
@@ -38,6 +44,23 @@ public class App {
             System.out.println("Todos los análisis han finalizado.");
         } catch (IOException | InterruptedException e) {
             System.err.println("Error al ejecutar los procesos: " + e.getMessage());
+        }
+    }
+
+    private static void captureProcessOutput(Process process, String processName) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
+
+            System.out.println("Salida de " + processName + ":");
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            System.out.println("Errores de " + processName + ":");
+            while ((line = errorReader.readLine()) != null) {
+                System.err.println(line);
+            }
         }
     }
 }
