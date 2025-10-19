@@ -7,24 +7,21 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.salesianos.utils.FileHelper;
+import net.salesianos.config.PathsConfig;
 
 public class SalesAnalyzer {
 
     public static void main(String[] args) {
-        if (args.length < 3) {
-            System.err.println("Uso: java SalesAnalyzer <inputFilePath> <productReportPath> <dateReportPath>");
-            System.exit(1);
-        }
-
-        String inputFilePath = args[0];
-        String productReportPath = args[1];
-        String dateReportPath = args[2];
-
         SalesAnalyzer analyzer = new SalesAnalyzer();
-        analyzer.analyzeSales(inputFilePath, productReportPath, dateReportPath);
+        analyzer.analyzeSales();
     }
 
-    public void analyzeSales(String inputFilePath, String productReportPath, String dateReportPath) {
+    public void analyzeSales() {
+        // Usar rutas directamente desde PathsConfig
+        String inputFilePath = PathsConfig.SALES_CSV_PATH;
+        String productReportPath = PathsConfig.PRODUCT_REPORT_PATH;
+        String dateReportPath = PathsConfig.DATE_REPORT_PATH;
+
         // Leer datos del archivo CSV
         List<String[]> salesData = FileHelper.readCSV(inputFilePath);
 

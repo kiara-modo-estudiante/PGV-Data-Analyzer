@@ -1,5 +1,3 @@
-import net.salesianos.config.PathsConfig;
-
 import java.io.IOException;
 
 public class App {
@@ -10,19 +8,13 @@ public class App {
             ProcessBuilder salesProcessBuilder = new ProcessBuilder(
                     "java",
                     "-cp", "./bin", // Ruta al directorio de clases compiladas
-                    "net.salesianos.modules.SalesAnalyzer",
-                    PathsConfig.SALES_CSV_PATH,
-                    PathsConfig.PRODUCT_REPORT_PATH,
-                    PathsConfig.DATE_REPORT_PATH);
+                    "net.salesianos.modules.SalesAnalyzer");
 
             // Crear proceso para el análisis de stock
             ProcessBuilder stockProcessBuilder = new ProcessBuilder(
                     "java",
                     "-cp", "./bin", // Ruta al directorio de clases compiladas
-                    "net.salesianos.modules.StockAnalyzer",
-                    PathsConfig.PRODUCTS_CSV_PATH,
-                    PathsConfig.LOW_STOCK_CSV_PATH,
-                    PathsConfig.HIGH_STOCK_CSV_PATH);
+                    "net.salesianos.modules.StockAnalyzer");
 
             // Iniciar ambos procesos
             Process salesProcess = salesProcessBuilder.start();

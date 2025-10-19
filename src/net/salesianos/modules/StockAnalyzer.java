@@ -1,6 +1,7 @@
 package net.salesianos.modules;
 
 import net.salesianos.utils.FileHelper;
+import net.salesianos.config.PathsConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,20 +9,16 @@ import java.util.List;
 public class StockAnalyzer {
 
     public static void main(String[] args) {
-        if (args.length < 3) {
-            System.err.println("Uso: java StockAnalyzer <inputFilePath> <lowStockOutputPath> <highStockOutputPath>");
-            System.exit(1);
-        }
-
-        String inputFilePath = args[0];
-        String lowStockOutputPath = args[1];
-        String highStockOutputPath = args[2];
-
         StockAnalyzer analyzer = new StockAnalyzer();
-        analyzer.analyzeStock(inputFilePath, lowStockOutputPath, highStockOutputPath);
+        analyzer.analyzeStock();
     }
 
-    public void analyzeStock(String inputFilePath, String lowStockOutputPath, String highStockOutputPath) {
+    public void analyzeStock() {
+        // Usar rutas directamente desde PathsConfig
+        String inputFilePath = PathsConfig.PRODUCTS_CSV_PATH;
+        String lowStockOutputPath = PathsConfig.LOW_STOCK_CSV_PATH;
+        String highStockOutputPath = PathsConfig.HIGH_STOCK_CSV_PATH;
+
         // Incluir la fecha en ficheros de salida
         lowStockOutputPath = FileHelper.appendDateToFileName(lowStockOutputPath);
         highStockOutputPath = FileHelper.appendDateToFileName(highStockOutputPath);
