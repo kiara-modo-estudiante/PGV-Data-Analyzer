@@ -32,14 +32,14 @@ public class FileHelper {
                 data.add(values);
             }
 
-            // Mostrar datos en consola
-            for (String[] row : data) {
-                for (String value : row) {
-                    System.out.print(value + " ");
-                }
-                System.out.println();
+            // // Mostrar datos en consola
+            // for (String[] row : data) {
+            // for (String value : row) {
+            // System.out.print(value + " ");
+            // }
+            // System.out.println();
 
-            }
+            // }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
@@ -66,7 +66,7 @@ public class FileHelper {
                 writer.append("\n");
             }
 
-            System.out.println("Archivo CSV generado: " + filePath);
+            System.out.println(ConsoleColors.GREEN + "Archivo CSV generado: " + ConsoleColors.RESET + filePath);
         } catch (IOException e) {
             System.err.println("Error al escribir el archivo CSV: " + e.getMessage());
         }

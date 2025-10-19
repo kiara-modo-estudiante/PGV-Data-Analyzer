@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import net.salesianos.utils.ConsoleColors;
+
 public class App {
     public static void main(String[] args) {
 
@@ -52,15 +54,23 @@ public class App {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
 
-            System.out.println("Salida de " + processName + ":");
+            System.out.println("⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯");
+            System.out
+                    .println("\n\t\t" + ConsoleColors.BLUE + ConsoleColors.BOLD + ConsoleColors.UNDERLINE + "Salida de "
+                            + processName + ":" + ConsoleColors.RESET + "\n");
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
 
-            System.out.println("Errores de " + processName + ":");
+            System.out.print(ConsoleColors.YELLOW + "Errores de " + processName + ": " + ConsoleColors.RESET);
+            boolean hasErrors = false;
             while ((line = errorReader.readLine()) != null) {
+                hasErrors = true;
                 System.err.println(line);
+            }
+            if (!hasErrors) {
+                System.out.println("Ninguno.");
             }
         }
     }
