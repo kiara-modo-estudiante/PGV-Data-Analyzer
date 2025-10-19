@@ -80,16 +80,17 @@ public class FileHelper {
      * @return Ruta del archivo con la fecha agregada.
      */
     public static String appendDateToFileName(String filePath) {
-        // Obtener la fecha actual y formatearla
-        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        // Obtener la fecha y hora actual y formatearlas
+        String currentDateTime = LocalDate.now().atTime(java.time.LocalTime.now())
+                .format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
 
         int dotIndex = filePath.lastIndexOf(".");
         if (dotIndex == -1) {
-            return filePath + "_" + currentDate; // Si no hay extensión, solo agrega la fecha
+            return filePath + "_" + currentDateTime; // Si no hay extensión, solo agrega la fecha y hora
         }
         String name = filePath.substring(0, dotIndex);
         String extension = filePath.substring(dotIndex);
-        return name + "_" + currentDate + extension; // Agrega la fecha antes de la extensión
+        return name + "_" + currentDateTime + extension; // Agrega la fecha y hora antes de la extensión
     }
 
     /**

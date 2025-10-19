@@ -22,6 +22,10 @@ public class SalesAnalyzer {
         String productReportPath = PathsConfig.PRODUCT_REPORT_PATH;
         String dateReportPath = PathsConfig.DATE_REPORT_PATH;
 
+        // Incluir la fecha en ficheros de salida
+        productReportPath = FileHelper.appendDateToFileName(productReportPath);
+        dateReportPath = FileHelper.appendDateToFileName(dateReportPath);
+
         // Leer datos del archivo CSV
         List<String[]> salesData = FileHelper.readCSV(inputFilePath);
 
