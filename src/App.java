@@ -44,6 +44,7 @@ public class App {
         // Lanzar los procesos
         processLauncher.launchProcess("SalesAnalyzer", salesProcessBuilder);
         processLauncher.launchProcess("StockAnalyzer", stockProcessBuilder);
+        String dateOfFilesCreation = FileHelper.getCurrentDateTime();
 
         System.out.println(ConsoleColors.PURPLE + "\n¡Todos los análisis han finalizado!" + ConsoleColors.RESET);
 
@@ -55,7 +56,7 @@ public class App {
         if (userResponse.equals("s")) {
             // Mostrar resoluciones finales
             System.out.println(ConsoleColors.PURPLE + "\nResultados finales:" + ConsoleColors.RESET);
-            FileHelper.printAllCSVOutputs();
+            FileHelper.printGeneratedCSVOutputs(dateOfFilesCreation);
         } else {
             System.out.println(ConsoleColors.GREEN
                     + "¡Análisis completado! Los resultados están disponibles en los archivos CSV generados."

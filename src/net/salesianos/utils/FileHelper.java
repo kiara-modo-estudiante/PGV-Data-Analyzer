@@ -85,23 +85,27 @@ public class FileHelper {
     }
 
     /**
-     * Imprime el contenido de todos los archivos CSV ubicados en el directorio
-     * "./src/data/output".
+     * Imprime el contenido de los archivos CSV generados en una fecha especifica
+     * (por el nombre que tienen)
+     *
+     * @param dateOfFile fecha de creación.
      */
-    public static void printAllCSVOutputs() {
-        File directory = new File("./src/data/output");
-        File[] files = directory.listFiles((dir, name) -> name.endsWith(".csv"));
-
-        if (files != null) {
-            for (File file : files) {
-                System.out.println("⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯");
-                System.out
-                        .println(ConsoleColors.CYAN + "Contenido del archivo: " + file.getName() + ConsoleColors.RESET);
-                FileHelper.printCSV(file.getPath());
+    public static void printGeneratedCSVOutputs(String dateOfFile) {
+        File outputDir = new File("./src/data/output");
+        if (outputDir.exists() && outputDir.isDirectory()) {
+            File[] files = outputDir.listFiles((dir, name) -> name.contains(dateOfFile) && name.endsWith(".csv"));
+            if (files != null) {
+                for (File file : files) {
+                    System.out.println("⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯");
+                    System.out.println(
+                            ConsoleColors.CYAN + "Contenido del archivo: " + file.getName() + ConsoleColors.RESET);
+                    printCSV(file.getPath());
+                }
+            } else {
+                System.out.println("No se encontraron archivos CSV creados ahora mismo.");
             }
         } else {
-            System.out.println(
-                    ConsoleColors.RED + "No se encontraron archivos en el directorio de salida." + ConsoleColors.RESET);
+            System.out.println("El directorio 'outputs' no existe.");
         }
     }
 
@@ -139,16 +143,24 @@ public class FileHelper {
      */
     public static String appendDateToFileName(String filePath) {
         // Obtener la fecha y hora actual y formatearlas
-        String currentDateTime = LocalDate.now().atTime(java.time.LocalTime.now())
-                .format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
 
         int dotIndex = filePath.lastIndexOf(".");
         if (dotIndex == -1) {
-            return filePath + "_" + currentDateTime; // Si no hay extensión, solo agrega la fecha y hora
+            return filePath + "_" + getCurrentDateTime(); // Si no hay extensión, solo agrega la fecha y hora
         }
         String name = filePath.substring(0, dotIndex);
         String extension = filePath.substring(dotIndex);
-        return name + "_" + currentDateTime + extension; // Agrega la fecha y hora antes de la extensión
+        return name + "_" + getCurrentDateTime() + extension; // Agrega la fecha y hora antes de la extensión
+    }
+
+    /**
+     * Devuelve la fecha y hora actual en el formato "yyyyMMddHHmm".
+     *
+     * @return La fecha y hora actual como cadena.
+     */
+    public static String getCurrentDateTime() {
+        return LocalDate.now().atTime(java.time.LocalTime.now())
+                .format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
     }
 
     /**
