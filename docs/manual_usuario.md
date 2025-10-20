@@ -130,15 +130,21 @@ El programa puede generar diferentes respuestas en la consola dependiendo de la 
     <tbody>
         <tr>
             <td>
-                <img src="./images/console/console_success.png" alt="Todo correcto sin errores" width="900">
+                <img src="./images/console/console_success.png" alt="Todo correcto sin errores" width="1000">
             </td>
             <td>El programa se ejecutó correctamente sin errores. Los datos de entrada fueron válidos y el análisis se completó con éxito.</td>
         </tr>
         <tr>
             <td>
-                <img src="./images/console/console_failure.png" alt="Fallo en la ejecución" width="900">
+                <img src="./images/console/console_error_1.png" alt="Fallo en la ejecución por input consola." width="1000">
             </td>
-            <td>Se produjo un error durante la ejecución. Esto puede deberse a datos de entrada incorrectos, como en este caso.</td>
+            <td>Se produjo un error durante la ejecución. En este caso, debido a elegir por consola como cantidad de stock valores que no son números enteros.</td>
+        </tr>
+         <tr>
+            <td>
+                <img src="./images/console/console_error_2.png" alt="Fallo en la ejecución por input csv" width="1000">
+            </td>
+            <td>Se produjo un error durante la ejecución. En este caso se nos indica que hemos introducido en el CSV de productos un producto inválido. Un valor es de un tipo que no encaja: una string "nosoyunnumerodecantidad".</td>
         </tr>
     </tbody>
 </table>
