@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import net.salesianos.utils.ConsoleColors;
@@ -20,12 +22,14 @@ public class App {
 
         // Preguntar al usuario por los valores de bajo y alto stock
         System.out.print(
-                "1. Introduce el valor para considerar" + ConsoleColors.CYAN + " bajo stock" + ConsoleColors.RESET
+                "1. Introduce el valor para considerar" + ConsoleColors.CYAN + " bajo stock"
+                        + ConsoleColors.RESET
                         + " un producto: ");
         String lowStock = scanner.nextLine();
 
         System.out.print(
-                "2. Introduce el valor para considerar" + ConsoleColors.CYAN + " alto stock" + ConsoleColors.RESET
+                "2. Introduce el valor para considerar" + ConsoleColors.CYAN + " alto stock"
+                        + ConsoleColors.RESET
                         + " un producto: ");
         String highStock = scanner.nextLine();
 
@@ -41,16 +45,25 @@ public class App {
                 "-cp", "./bin", // Ruta al directorio de clases compiladas
                 "net.salesianos.modules.StockAnalyzer", lowStock, highStock);
 
-        // Lanzar los procesos
-        processLauncher.launchProcess("SalesAnalyzer", salesProcessBuilder);
-        processLauncher.launchProcess("StockAnalyzer", stockProcessBuilder);
+        // Crear lista de procesos
+        List<ProcessBuilder> processBuilders = new ArrayList<>();
+        processBuilders.add(salesProcessBuilder);
+        processBuilders.add(stockProcessBuilder);
+
+        // Lanzar los procesos de forma concurrente
+        processLauncher.launchProcesses(processBuilders);
+
         String dateOfFilesCreation = FileHelper.getCurrentDateTime();
 
-        System.out.println(ConsoleColors.PURPLE + "\n¡Todos los análisis han finalizado!" + ConsoleColors.RESET);
+        System.out.println("\n⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯");
+        System.out.println(
+                ConsoleColors.BLUE_BACKGROUND + "\n¡Todos los análisis han finalizado!"
+                        + ConsoleColors.RESET + "");
 
         // Preguntar si el usuario quiere ver los resultados por consola
         System.out.print(
-                ConsoleColors.YELLOW + "\n¿Deseas ver los resultados por consola? (s/n): " + ConsoleColors.RESET);
+                ConsoleColors.BOLD + "\n¿Deseas ver los resultados por consola? (s/n): "
+                        + ConsoleColors.RESET);
         String userResponse = scanner.nextLine().trim().toLowerCase();
 
         if (userResponse.equals("s")) {
