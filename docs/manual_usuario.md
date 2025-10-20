@@ -129,20 +129,19 @@ El programa puede generar diferentes respuestas en la consola dependiendo de la 
     </thead>
     <tbody>
         <tr>
-            <td>
-                <img src="./images/console/console_success.png" alt="Todo correcto sin errores" width="1000">
+            <td style="width: 80%;">
+                <img src="./images/console/console_success.png" alt="Todo correcto sin errores" width="100%">
             </td>
             <td>El programa se ejecutó correctamente sin errores. Los datos de entrada fueron válidos y el análisis se completó con éxito.</td>
         </tr>
         <tr>
-            <td>
-                <img src="./images/console/console_error_1.png" alt="Fallo en la ejecución por input consola." width="1000">
+       <td style="width: 80%;">                <img src="./images/console/console_error_1.png" alt="Fallo en la ejecución por input consola." width="100%">
             </td>
             <td>Se produjo un error durante la ejecución. En este caso, debido a elegir por consola como cantidad de stock valores que no son números enteros.</td>
         </tr>
-         <tr>
-            <td>
-                <img src="./images/console/console_error_2.png" alt="Fallo en la ejecución por input csv" width="1000">
+        <tr>
+            <td style="width: 80%;">
+                <img src="./images/console/console_error_2.png" alt="Fallo en la ejecución por input csv" width="100%">
             </td>
             <td>Se produjo un error durante la ejecución. En este caso se nos indica que hemos introducido en el CSV de productos un producto inválido. Un valor es de un tipo que no encaja: una string "nosoyunnumerodecantidad".</td>
         </tr>
@@ -226,3 +225,5 @@ El programa **PGV-Data-Analyzer** genera múltiples reportes que permiten interp
    - La opción de visualizar los resultados directamente en la consola proporciona una manera rápida y accesible de interpretar los datos sin necesidad de abrir los archivos generados.
 
 En conjunto, estos reportes ofrecen una visión integral del desempeño de los productos y las ventas, permitiendo tomar decisiones informadas para mejorar la eficiencia operativa y maximizar los ingresos.
+
+⬅️ [Volver al README](../README.md)
