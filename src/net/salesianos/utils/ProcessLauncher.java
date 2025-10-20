@@ -74,22 +74,19 @@ public class ProcessLauncher {
                 System.out.println(line);
             }
 
-            System.out.print(ConsoleColors.YELLOW + "Errores de " + processName + ": " + ConsoleColors.RESET);
+            if ((line = errorReader.readLine()) == null) {
+                System.out.println(ConsoleColors.GREEN + "Análisis completado sin errores." + ConsoleColors.RESET);
+            }
             boolean hasErrors = false;
-
             while ((line = errorReader.readLine()) != null) {
-                hasErrors = true;
+                if (!hasErrors) {
+                    System.out.print(ConsoleColors.RED_BACKGROUND + "Errores de " + processName + ":"
+                            + ConsoleColors.RESET + " ");
+                    hasErrors = true;
+                }
                 System.err.println(line);
             }
-            if (!hasErrors) {
-                System.out.println("Ninguno.");
 
-                System.out.println(
-                        ConsoleColors.GREEN_BACKGROUND + "¡Este proceso ha terminado con éxito!" + ConsoleColors.RESET);
-            } else {
-                System.out.println(
-                        ConsoleColors.RED_BACKGROUND + "¡Oops! Algo anda mal..." + ConsoleColors.RESET);
-            }
         }
     }
 

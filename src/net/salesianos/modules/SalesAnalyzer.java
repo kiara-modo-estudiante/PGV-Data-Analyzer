@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.salesianos.utils.ConsoleColors;
 import net.salesianos.utils.FileHelper;
 import net.salesianos.config.PathsConfig;
 
@@ -58,7 +59,8 @@ public class SalesAnalyzer {
                 salesByDate.put(date, salesByDate.getOrDefault(date, 0) + quantity);
 
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.err.println("Error al procesar la venta: " + e.getMessage());
+                System.err.println(
+                        ConsoleColors.RED + "Error al procesar la venta: " + e.getMessage() + ConsoleColors.RESET);
             }
         }
 
