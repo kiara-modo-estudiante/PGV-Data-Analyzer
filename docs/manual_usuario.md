@@ -10,6 +10,7 @@ Este documento está diseñado para guiar al usuario en el uso del programa **PG
    - [Fichero products.csv](#fichero-productscsv)
    - [Fichero sales.csv](#fichero-salescsv)
    - [Entrada por consola](#entrada-por-consola)
+   - [Prueba de depuración](#prueba-de-depuración)
 3. [Salida de datos (CSV y Consola)](#3-salida-de-datos-csv-y-consola)
    - [Fichero de productos con STOCK ALTO](#fichero-de-productos-con-stock-alto)
    - [Fichero de productos con STOCK BAJO](#fichero-de-productos-con-stock-bajo)
@@ -114,6 +115,8 @@ En primer lugar, nos pide que indiquemos CUÁNTAS unidades debe de tener un prod
 Después, nos pedirá CUÁNTAS unidades debe de tener un producto para ser considerado producto con un **stock alto**.
 
 ![Alto Stock](./images/console_high_stock.png)
+
+### Prueba de depuración
 
 El programa puede generar diferentes respuestas en la consola dependiendo de la entrada proporcionada por el usuario. A continuación, se muestra una tabla con las posibles respuestas y su significado:
 
