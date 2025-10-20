@@ -1,10 +1,24 @@
 package net.salesianos.utils;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProcessLauncher {
 
+    /**
+     * Lanza y gestiona una lista de procesos proporcionados mediante
+     * ProcessBuilder de manera concurrente.
+     * 
+     * @param processBuilders Lista de objetos ProcessBuilder que representan los
+     *                        procesos a ejecutar.
+     * 
+     * @throws IOException          Si ocurre un error al iniciar un proceso.
+     * @throws InterruptedException Si el hilo principal es interrumpido mientras
+     *                              espera que un proceso termine.
+     */
     public void launchProcesses(List<ProcessBuilder> processBuilders) {
         List<Process> processes = new ArrayList<>();
 
@@ -38,6 +52,14 @@ public class ProcessLauncher {
         }
     }
 
+    /**
+     * Captura y muestra la salida estándar y de error de un proceso en ejecución.
+     *
+     * @param process     El proceso del cual se capturará la salida.
+     * @param processName El nombre del proceso, utilizado para identificar la
+     *                    salida.
+     * @throws IOException Si ocurre un error al leer las salidas del proceso.
+     */
     private static void captureProcessOutput(Process process, String processName) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
@@ -72,6 +94,15 @@ public class ProcessLauncher {
     }
 
     // Método para obtener el nombre del proceso a partir del comando
+    /**
+     * Obtiene el nombre del proceso a partir de un ProcessBuilder.
+     * Busca en la lista de comandos si contiene "SalesAnalyzer" o "StockAnalyzer".
+     * 
+     * @param processBuilder El ProcessBuilder que contiene la configuración del
+     *                       proceso.
+     * @return El nombre del proceso si se encuentra, o "Proceso desconocido" si no
+     *         coincide.
+     */
     private String getProcessName(ProcessBuilder processBuilder) {
         List<String> command = processBuilder.command();
         for (String part : command) {
