@@ -55,7 +55,7 @@ Una vez correctamente compilado, podemos ejecutar el programa de dos maneras:
             <td>Ejecuta el programa con el comando: <code>java -cp bin App</code> desde la carpeta raíz.</td>
             <td>
                 <p>Ejecuta el programa directamente desde la interfaz de Visual Studio Code.</p>
-                <img src="./images/execute_program.png" alt="Ejecución en VS Code" width="200">
+                <img src="./images/ide/execute_program.png" alt="Ejecución en VS Code" width="200">
             </td>
         </tr>
     </tbody>
@@ -63,7 +63,7 @@ Una vez correctamente compilado, podemos ejecutar el programa de dos maneras:
 
 Si todo sale correctamente, deberías de ver lo siguiente por consola:
 
-![Imagen de bienvenida en consola](./images/console_welcome.png)
+![Imagen de bienvenida en consola](./images/console/console_welcome.png)
 
 <br>
 
@@ -76,7 +76,7 @@ El programa permite dos formas de entrada de datos:
 
 ### Fichero products.csv
 
-![Captura del contenido de products.csv](./images/products_content.png)
+![Captura del contenido de products.csv](./images/csv/products_content.png)
 _**Para visualizar de esta manera el contenido de los ficheros .csv en VS Code, instala la extensión: [Edit CSV](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv)**_
 
 Como se observa en la imagen anterior, el archivo `products.csv` contiene una tabla con los siguientes campos:
@@ -92,7 +92,7 @@ Estos campos son esenciales para el análisis, ya que permiten identificar y cat
 
 ### Fichero sales.csv
 
-![Captura del contenido de sales.csv](./images/sales_content.png)
+![Captura del contenido de sales.csv](./images/csv/sales_content.png)
 
 En cuanto el archivo `sales.csv`, este contiene una tabla con los siguientes campos:
 
@@ -108,13 +108,13 @@ En cuanto el archivo `sales.csv`, este contiene una tabla con los siguientes cam
 
 Desde la consola, una vez ejecutado, el programa nos solicitará dos valores enteros:
 
-![Bajo Stock](./images/console_welcome.png)
+![Bajo Stock](./images/console/console_welcome.png)
 
 En primer lugar, nos pide que indiquemos CUÁNTAS unidades debe de tener un producto para ser considerado producto con un **stock bajo**. Esto lo vemos en la imagen superior.
 
 Después, nos pedirá CUÁNTAS unidades debe de tener un producto para ser considerado producto con un **stock alto**.
 
-![Alto Stock](./images/console_high_stock.png)
+![Alto Stock](./images/console/console_high_stock.png)
 
 ### Prueba de depuración
 
@@ -130,13 +130,13 @@ El programa puede generar diferentes respuestas en la consola dependiendo de la 
     <tbody>
         <tr>
             <td>
-                <img src="./images/console_success.png" alt="Todo correcto sin errores" width="900">
+                <img src="./images/console/console_success.png" alt="Todo correcto sin errores" width="900">
             </td>
             <td>El programa se ejecutó correctamente sin errores. Los datos de entrada fueron válidos y el análisis se completó con éxito.</td>
         </tr>
         <tr>
             <td>
-                <img src="./images/console_failure.png" alt="Fallo en la ejecución" width="900">
+                <img src="./images/console/console_failure.png" alt="Fallo en la ejecución" width="900">
             </td>
             <td>Se produjo un error durante la ejecución. Esto puede deberse a datos de entrada incorrectos, como en este caso.</td>
         </tr>
@@ -159,19 +159,19 @@ Los resultados del análisis pueden exportarse o visualizarse de las siguientes 
 
 ### Fichero de productos con stock ALTO
 
-![Contenido high_stock_report](./images/high_stock_content.png)
+![Contenido high_stock_report](./images/csv/high_stock_content.png)
 
 Misma estructura que el fichero de [productos](#fichero-productscsv), pero únicamente incluyendo aquellos que cumplan el requisito: tener tantas o MENOS unidades en stock que las indicadas por el usuario.
 
 ### Fichero de productos con stock BAJO
 
-![Contenido low_stock_report](./images/low_stock_content.png)
+![Contenido low_stock_report](./images/csv/low_stock_content.png)
 
 Misma estructura que el fichero de [productos](#fichero-productscsv), pero únicamente incluyendo aquellos que cumplan el requisito: tener tantas o MENOS unidades en stock que las indicadas por el usuario.
 
 ### Fichero de ventas realizadas por DÍA
 
-![Contenido sales_by_date](./images/sales_by_date_content.png)
+![Contenido sales_by_date](./images/csv/sales_by_date_content.png)
 
 El archivo generado de **ventas realizadas por DÍA** contiene un resumen de las ventas agrupadas por fecha. Este archivo incluye las siguientes columnas:
 
@@ -182,7 +182,7 @@ Este reporte permite analizar el comportamiento de las ventas a lo largo del tie
 
 ### Fichero de ventas realizadas por PRODUCTO
 
-![Contenido sales_by_product](./images/sales_by_product_content.png)
+![Contenido sales_by_product](./images/csv/sales_by_product_content.png)
 
 El archivo generado de **ventas realizadas por PRODUCTO** contiene un resumen de las ventas agrupadas por cada producto. Este archivo incluye las siguientes columnas:
 
@@ -194,7 +194,7 @@ Este reporte permite analizar el rendimiento de cada producto, identificando cu�
 
 ### Salida por consola
 
-<img src="./images/console_results.png" alt="Resultados mostrando en consola" width="600">
+<img src="./images/console/console_results.png" alt="Resultados mostrando en consola" width="600">
 
 Como muestra la captura de pantalla de la consola, podemos decidir ver los .csv pintados en la consola, ofreciendo una visualización más fácil de interpretar en comparación a la de VS Code sin extensiones.
 
