@@ -74,17 +74,23 @@ public class ProcessLauncher {
                 System.out.println(line);
             }
 
-            if ((line = errorReader.readLine()) == null) {
-                System.out.println(ConsoleColors.GREEN + "Análisis completado sin errores." + ConsoleColors.RESET);
-            }
             boolean hasErrors = false;
+            StringBuilder errorOutput = new StringBuilder();
+
             while ((line = errorReader.readLine()) != null) {
                 if (!hasErrors) {
                     System.out.print(ConsoleColors.RED_BACKGROUND + "Errores de " + processName + ":"
                             + ConsoleColors.RESET + " ");
                     hasErrors = true;
                 }
-                System.err.println(line);
+                errorOutput.append(line).append(System.lineSeparator());
+            }
+
+            if (hasErrors) {
+                System.err.println(errorOutput.toString());
+            } else {
+                System.out.println(
+                        ConsoleColors.GREEN_BACKGROUND + "Análisis completado sin errores." + ConsoleColors.RESET);
             }
 
         }
