@@ -1,5 +1,6 @@
 package net.salesianos.modules;
 
+import net.salesianos.utils.ConsoleColors;
 import net.salesianos.utils.FileHelper;
 import net.salesianos.config.PathsConfig;
 
@@ -21,7 +22,8 @@ public class StockAnalyzer {
             StockAnalyzer analyzer = new StockAnalyzer();
             analyzer.analyzeStock(maxLowStock, minHighStock);
         } catch (NumberFormatException e) {
-            System.err.println("Los argumentos deben ser números enteros.");
+            System.err
+                    .println(ConsoleColors.YELLOW + "Los argumentos deben ser números enteros." + ConsoleColors.RESET);
         }
     }
 
@@ -38,9 +40,12 @@ public class StockAnalyzer {
         // Leer datos del archivo CSV
         List<String[]> products = FileHelper.readCSV(inputFilePath);
 
+        // Filtrar productos válidos antes de procesar
+        List<String[]> validProducts = filterValidProducts(products);
+
         // Filtrar productos con bajo y alto stock
-        List<String[]> lowStockProducts = filterProductsByStock(products, 0, maxLowStock);
-        List<String[]> highStockProducts = filterProductsByStock(products, minHighStock, Integer.MAX_VALUE);
+        List<String[]> lowStockProducts = filterProductsByStock(validProducts, 0, maxLowStock);
+        List<String[]> highStockProducts = filterProductsByStock(validProducts, minHighStock, Integer.MAX_VALUE);
 
         // Crear las carpetas de salida si no existen
         FileHelper.createOutputDirectory(lowStockOutputPath);
@@ -66,9 +71,30 @@ public class StockAnalyzer {
                     filteredProducts.add(product);
                 }
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.err.println("Error al procesar el producto: " + e.getMessage());
+                System.err.println("Error al procesar el producto validado: " + e.getMessage());
             }
         }
         return filteredProducts;
+    }
+
+    private List<String[]> filterValidProducts(List<String[]> products) {
+        List<String[]> validProducts = new ArrayList<>();
+        boolean isFirstRow = true; // Ignorar encabezados
+        for (String[] product : products) {
+            if (isFirstRow) {
+                isFirstRow = false;
+                validProducts.add(product); // Agregar encabezado
+                continue;
+            }
+            try {
+                Integer.parseInt(product[4]); // Verificar si "Cantidad en stock" es un número válido
+                validProducts.add(product);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                System.err.println(
+                        ConsoleColors.YELLOW + "Error al procesar el producto inválido: " + e.getMessage()
+                                + ConsoleColors.RESET);
+            }
+        }
+        return validProducts;
     }
 }
