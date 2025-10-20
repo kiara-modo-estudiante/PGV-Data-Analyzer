@@ -40,6 +40,12 @@ Todos los fichero .csv generados serán guardados en un directorio output, que s
 
 **⚠️ IMPORTANTE: La no compilación previa del proyecto con el comando ofrecido en el paso 3 puede impedir el correcto funcionamiento del mismo.**
 
+## Manual de Usuario
+
+En el manual de usuario encontrarás una guía más extendida sobre cómo utilizar el programa, desde la configuración inicial hasta la interpretación de los resultados generados.
+
+Puedes acceder al manual completo en el siguiente enlace: [Manual de Usuario](docs/manual_usuario.md)
+
 ## Estructura del proyecto
 
 ```bash
@@ -64,11 +70,17 @@ src
                 └── ProcessLauncher.java # Utilidad para lanzar procesos concurrentes
 ```
 
-## Manual de Usuario
+## Requisitos para Cumplimentar la Práctica
 
-En el manual de usuario encontrarás una guía sobre cómo utilizar el programa, desde la configuración inicial hasta la interpretación de los resultados generados.
+Aquí añado los puntos indicados a conseguir y la manera en la que considero que los he conseguido.
 
-Puedes acceder al manual completo en el siguiente enlace: [Manual de Usuario](docs/manual_usuario.md)
+| **Punto**                                                                    | **Descripción**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Proceso principal que recoge información de uno o varios ficheros**        | El proceso principal está implementado en la clase `App`. Este recoge información de los ficheros CSV (`products.csv` y `sales.csv`) a través de los subprocesos `StockAnalyzer` y `SalesAnalyzer`. Los ficheros se leen utilizando la clase `FileHelper`, que encapsula la lógica de lectura y escritura de archivos.                                                                                                                                                                                                     |
+| **Subprocesos que procesan datos con argumentos**                            | Los subprocesos están implementados en las clases `StockAnalyzer` y `SalesAnalyzer`. El subproceso `StockAnalyzer` recibe dos argumentos (`maxLowStock` y `minHighStock`) que determinan los límites para clasificar productos con stock bajo y alto. Ambos subprocesos procesan los datos de los ficheros CSV y generan resultados específicos.                                                                                                                                                                           |
+| **Proceso principal ejecuta subprocesos con salidas redirigidas a ficheros** | El proceso principal (`App`) utiliza la clase `ProcessLauncher` para ejecutar los subprocesos de forma concurrente. Las salidas de los subprocesos (`StockAnalyzer` y `SalesAnalyzer`) se redirigen a ficheros CSV generados automáticamente en la carpeta de salida (`/src/data/output`).                                                                                                                                                                                                                                 |
+| **Proceso principal muestra resoluciones tras finalizar los subprocesos**    | Una vez que los subprocesos han terminado, el proceso principal utiliza el método `FileHelper.printGeneratedCSVOutputs` para mostrar los resultados en consola si el usuario lo solicita. Si el usuario no desea ver los resultados en consola, se informa que los resultados están disponibles en los archivos CSV generados.                                                                                                                                                                                             |
+| **Métodos adicionales para encapsular código repetitivo**                    | La clase `FileHelper` encapsula la lógica de lectura, escritura y manejo de archivos CSV, evitando la repetición de código. La clase `ProcessLauncher` encapsula la lógica de ejecución y manejo de subprocesos. Métodos como `filterValidProducts` y `filterProductsByStock` en `StockAnalyzer` encapsulan la lógica de filtrado de productos. También observamos esta separación de responsabilidades con las clases `PathsConfig` para el manejo de rutas y `ConsoleColors` para la impresión de colores en la consola. |
 
 ## Licencia
 
